@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Raphael Castellano</title>
+    <meta name="description" content="Explore Raphael Castellano's innovative projects in AI, automation, and creative design.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-light: #fafafa;
+            --accent-teal: #4a9b8e;
+            --accent-amber: #f59e0b;
+            --text-gray: #6b7280;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: var(--accent-teal);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .project-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 2rem;
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar.scrolled {
+            background: rgba(250, 250, 250, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed top-0 w-full z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="font-display font-bold text-xl text-gray-800">
+                <a href="index.html">RC</a>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="nav-link text-gray-700 hover:text-teal-600 transition-colors">Home</a>
+                <a href="projects.html" class="nav-link text-teal-600 font-semibold">Projects</a>
+                <a href="about.html" class="nav-link text-gray-700 hover:text-teal-600 transition-colors">About</a>
+                <a href="contact.html" class="nav-link text-gray-700 hover:text-teal-600 transition-colors">Contact</a>
+            </div>
+            
+            <button class="md:hidden mobile-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="font-display text-5xl md:text-6xl font-bold mb-6 text-gray-800">
+                My Projects
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                A comprehensive showcase of my work in AI innovation, business automation, and creative design
+            </p>
+        </div>
+    </section>
+
+    <!-- Project Filters -->
+    <section class="py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-3 rounded-full border-2 border-teal-600 text-teal-600 font-semibold" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border-2 border-teal-600 text-teal-600 font-semibold" data-filter="ai">
+                    AI & ML
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border-2 border-amber-600 text-amber-600 font-semibold" data-filter="automation">
+                    Automation
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border-2 border-purple-600 text-purple-600 font-semibold" data-filter="design">
+                    Design
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border-2 border-green-600 text-green-600 font-semibold" data-filter="business">
+                    Business
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="pb-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="project-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- AI Chess Game -->
+                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden animate-on-scroll" data-category="ai">
+                    <div class="h-48 bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">AI Chess Game</h3>
+                        <p class="text-gray-600 mb-4">Advanced chess implementation using Firebase and no-code AI tools for intelligent gameplay with strategic depth analysis.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">Firebase</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">No-Code AI</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">Game Development</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-teal-600 font-semibold hover:text-teal-700 transition-colors" onclick="openModal('chess-modal')">
+                                View Details
+                            </button>
+                            <a href="#" class="text-gray-500 hover:text-teal-600 transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Firebase Uploader -->
+                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden animate-on-scroll" data-category="automation">
+                    <div class="h-48 bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">Firebase Uploader Tool</h3>
+                        <p class="text-gray-600 mb-4">Automated workflow solution for seamless file uploads and data management with real-time synchronization.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Firebase</span>
+                            <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Automation</span>
+                            <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Workflow</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-amber-600 font-semibold hover:text-amber-700 transition-colors" onclick="openModal('uploader-modal')">
+                                View Details
+                            </button>
+                            <a href="#" class="text-gray-500 hover:text-amber-600 transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sentiment Analysis -->
+                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden animate-on-scroll" data-category="ai">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">MovieReview SentimentAI</h3>
+                        <p class="text-gray-600 mb-4">NLP-powered sentiment analysis tool for movie reviews with 94% accuracy rate and real-time processing.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">NLP</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">GitHub</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-purple-600 font-semibold hover:text-purple-700 transition-colors" onclick="openModal('sentiment-modal')">
+                                View Details
+                            </button>
+                            <a href="#" class="text-gray-500 hover:text-purple-600 transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plant Disease Classifier -->
+                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden animate-on-scroll" data-category="ai">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">Plant Disease Classifier</h3>
+                        <p class="text-gray-600 mb-4">Advanced image classification system for identifying plant diseases using deep learning with 92% accuracy.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Image Classification</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Deep Learning</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Python</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-green-600 font-semibold hover:text-green-700 transition-colors" onclick="openModal('plant-modal')">
+                                View Details
+                            </button>
+                            <a href="#" class="text-gray-500 hover:text-green-600 transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boss Pepper Sauce -->
+                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden animate-on-scroll" data-category="business">
+                    <div class="h-48 bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">Boss Pepper Sauce</h3>
+                        <p class="text-gray-600 mb-4">Founded and managed successful food manufacturing business with nationwide distribution and marketing.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">Entrepreneurship</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">Manufacturing</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">Marketing</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-red-600 font-semibold hover:text-red-700 transition-colors" onclick="openModal('boss-modal')">
+                                View Details
+                            </button>
+                            <span class="text-gray-400 text-sm">2014-2018</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amy's Dream -->
+                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden animate-on-scroll" data-category="design">
+                    <div class="h-48 bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">Amy's Dream - Brand Design</h3>
+                        <p class="text-gray-600 mb-4">Complete brand identity and marketing design for luxury boutique, including logos, packaging, and promotional materials.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Brand Design</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Graphic Design</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Marketing</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-pink-600 font-semibold hover:text-pink-700 transition-colors" onclick="openModal('amys-modal')">
+                                View Details
+                            </button>
+                            <span class="text-gray-400 text-sm">2021-2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technoglory Enterprizes -->
+                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden animate-on-scroll" data-category="business">
+                    <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6.364 1.636l.707.707M21 12h-2M4 12H2m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">Technoglory Enterprizes</h3>
+                        <p class="text-gray-600 mb-4">Led product management, IT support, and customer service operations for technology enterprise solutions.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">Product Management</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">IT Support</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">Customer Service</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-indigo-600 font-semibold hover:text-indigo-700 transition-colors" onclick="openModal('technoglory-modal')">
+                                View Details
+                            </button>
+                            <span class="text-gray-400 text-sm">2008-2014</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modals -->
+    <div id="chess-modal" class="project-modal">
+        <div class="modal-content">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 class="font-display text-3xl font-bold text-gray-800">AI Chess Game</h2>
+                    <button onclick="closeModal('chess-modal')" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="mb-6">
+                    <img src="https://via.placeholder.com/800x400/4FD1C7/FFFFFF?text=AI+Chess+Game" alt="AI Chess Game" class="w-full h-64 object-cover rounded-lg">
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        This advanced chess implementation combines the power of Firebase real-time database with sophisticated AI algorithms to create an engaging and intelligent gaming experience. The system analyzes player moves, predicts optimal strategies, and adapts its difficulty level based on user performance.
+                    </p>
+                    
+                    <div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Key Features:</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Real-time multiplayer functionality using Firebase</li>
+                            <li>AI opponent with adjustable difficulty levels</li>
+                            <li>Move validation and legal move highlighting</li>
+                            <li>Game state persistence and replay functionality</li>
+                            <li>Performance analytics and player statistics</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Technologies Used:</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">Firebase</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">JavaScript</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">No-Code AI</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">Real-time Database</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add more modals for other projects -->
+    <div id="uploader-modal" class="project-modal">
+        <div class="modal-content">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 class="font-display text-3xl font-bold text-gray-800">Firebase Uploader Tool</h2>
+                    <button onclick="closeModal('uploader-modal')" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="mb-6">
+                    <img src="https://via.placeholder.com/800x400/F59E0B/FFFFFF?text=Firebase+Uploader" alt="Firebase Uploader" class="w-full h-64 object-cover rounded-lg">
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        A comprehensive file management and automation tool that streamlines the process of uploading, organizing, and distributing digital assets. The system integrates with Firebase storage and provides real-time synchronization across multiple platforms.
+                    </p>
+                    
+                    <div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Key Features:</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Drag-and-drop file upload interface</li>
+                            <li>Automatic file organization and tagging</li>
+                            <li>Real-time upload progress tracking</li>
+                            <li>Batch processing capabilities</li>
+                            <li>Integration with cloud storage services</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Technologies Used:</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Firebase</span>
+                            <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Node.js</span>
+                            <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Cloud Functions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('project-modal')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -217,6 +217,124 @@
         grid-template-columns: 1fr;
       }
     }
+
+/* Floating / immersive hero enhancements */
+.hero-shell {
+  position: relative;
+  min-height: calc(100vh - 5rem);
+  padding-top: 7rem;
+  padding-bottom: 5rem;
+  background:
+    radial-gradient(circle at top left, rgba(45, 212, 191, 0.12), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.18), transparent 55%),
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 55%);
+  overflow: hidden;
+}
+
+/* soft moving glow behind everything */
+.hero-shell::before,
+.hero-shell::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(48px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.hero-shell::before {
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.7), transparent 60%);
+  animation: float-soft 14s ease-in-out infinite;
+}
+
+.hero-shell::after {
+  width: 520px;
+  height: 520px;
+  bottom: -180px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.7), transparent 65%);
+  animation: float-soft-alt 18s ease-in-out infinite;
+}
+
+.avatar-ring {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 9999px;
+  background:
+    conic-gradient(
+      from 210deg,
+      rgba(45, 212, 191, 0.1),
+      rgba(45, 212, 191, 0.9),
+      rgba(251, 191, 36, 0.9),
+      rgba(129, 140, 248, 0.9),
+      rgba(45, 212, 191, 0.1)
+    );
+  box-shadow:
+    0 0 40px rgba(56, 189, 248, 0.4),
+    0 20px 60px rgba(15, 23, 42, 0.9);
+  animation: spin-slow 22s linear infinite;
+}
+
+.avatar-ring::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 20%, rgba(248, 250, 252, 0.35), transparent 60%);
+  opacity: 0.65;
+}
+
+/* floating chips / cards */
+.float-soft {
+  animation: float-soft 10s ease-in-out infinite;
+}
+
+.float-soft-alt {
+  animation: float-soft-alt 13s ease-in-out infinite;
+}
+
+.float-soft-fast {
+  animation: float-soft-fast 8s ease-in-out infinite;
+}
+
+/* subtle “breathing” glow */
+.pulse-soft {
+  animation: pulse-soft 3.4s ease-in-out infinite;
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25%      { transform: translateY(-10px) translateX(6px); }
+  50%      { transform: translateY(-4px) translateX(-4px); }
+  75%      { transform: translateY(6px) translateX(2px); }
+}
+
+@keyframes float-soft-alt {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25%      { transform: translateY(10px) translateX(-8px); }
+  50%      { transform: translateY(2px) translateX(4px); }
+  75%      { transform: translateY(-8px) translateX(2px); }
+}
+
+@keyframes float-soft-fast {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.0); }
+  50%      { box-shadow: 0 0 40px 0 rgba(45, 212, 191, 0.35); }
+}
+
+@keyframes spin-slow {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   </style>
 </head>
 
@@ -261,141 +379,120 @@
 
     <!-- MAIN CONTENT -->
     <main class="pt-28 md:pt-32 px-4 md:px-6 relative z-10">
-      <!-- HERO -->
-      <section class="max-w-6xl mx-auto hero-grid grid md:grid-cols-2 gap-10 items-center">
-        <!-- Left: text -->
-        <div class="fade-in" id="hero-text">
-          <div class="pill-tag inline-flex items-center gap-2 px-4 py-2 mb-5 text-xs text-teal-100">
-            <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            Remote-ready · Trinidad & Tobago · Global clients
-          </div>
+<!-- Hero -->
+<section id="home" class="hero-shell text-slate-100">
+  <div class="relative max-w-6xl mx-auto px-6 lg:px-0">
+    <!-- little floating label top left -->
+    <div class="flex flex-wrap gap-2 mb-8 text-xs font-medium text-emerald-300 float-soft-fast">
+      <span class="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-1 backdrop-blur">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 pulse-soft"></span>
+        Remote-ready • Trinidad & Tobago • Global clients
+      </span>
+    </div>
 
-          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-slate-50 leading-tight mb-4">
-            I design <span class="text-teal-300">AI-powered</span> and
-            <span class="text-amber-300">human-centered</span> systems.
-          </h1>
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-center">
+      <!-- LEFT: headline + CTAs -->
+      <div class="space-y-8 relative z-[2]">
+        <p class="text-sm uppercase tracking-[0.22em] text-teal-300/80">
+          Raphael Castellano • AI · Data · Creative Systems
+        </p>
 
-          <p class="text-slate-300 text-sm md:text-base max-w-xl mb-4">
-            I’m Raphael, a data-savvy problem solver and creative technologist with
-            20+ years in service, tech, and operations. I help leaders turn
-            scattered tools and ideas into workflows that feel clear, calm, and
-            actually sustainable.
-          </p>
-
-          <p class="text-slate-400 text-xs md:text-sm max-w-xl mb-7">
-            Whether you’re trying to ship faster, support customers better, or make
-            smarter use of AI, my focus is simple: build systems that respect people
-            and deliver results.
-          </p>
-
-          <div class="flex flex-wrap items-center gap-4 mb-6">
-            <a
-              href="projects.html"
-              class="btn-primary inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold"
-            >
-              Explore My Work
-            </a>
-            <a
-              href="contact.html"
-              class="btn-ghost inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold text-slate-100"
-            >
-              Start a Conversation
-            </a>
-          </div>
-
-          <div class="flex flex-wrap gap-3 text-xs text-slate-300">
-            <span class="badge-soft border-emerald-400/70 text-emerald-200">
-              AI & Automation
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
+          I design
+          <span class="bg-gradient-to-r from-emerald-300 via-teal-200 to-sky-300 bg-clip-text text-transparent">
+            AI-powered
+          </span>
+          <span class="block mt-2">
+            and
+            <span class="bg-gradient-to-r from-amber-300 via-rose-200 to-emerald-200 bg-clip-text text-transparent">
+              human-centred
             </span>
-            <span class="badge-soft border-sky-400/70 text-sky-200">
-              Data & Insight
-            </span>
-            <span class="badge-soft border-amber-400/70 text-amber-200">
-              CX & Operations
-            </span>
-            <span class="badge-soft border-purple-400/70 text-purple-200">
-              Creative Systems
-            </span>
-          </div>
+            systems.
+          </span>
+        </h1>
+
+        <p class="max-w-xl text-base sm:text-lg text-slate-300/90">
+          I’m Raphael, a data-savvy problem solver and creative technologist.
+          I help leaders turn scattered tools and messy workflows into systems
+          that feel **calm**, **coherent**, and actually sustainable.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="projects.html"
+             class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-400 via-teal-400 to-sky-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/30 hover:translate-y-0.5 hover:shadow-emerald-400/40 transition-transform">
+            Explore my work
+            <span class="text-lg">↗</span>
+          </a>
+
+          <a href="contact.html"
+             class="inline-flex items-center gap-2 rounded-full border border-slate-600/70 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-100 hover:border-emerald-400/80 hover:text-emerald-200 hover:bg-slate-900/80 transition-colors">
+            Start a conversation
+          </a>
         </div>
 
-        <!-- Right: profile card -->
-        <div class="fade-in" id="hero-card">
-          <div class="glass-panel p-7 md:p-8">
-            <div class="relative flex flex-col items-center text-center gap-5">
-              <div class="avatar-ring">
-                <img
-                  src="./resources/profile.jpg"
-                  alt="Raphael Castellano"
-                  class="h-28 w-28 md:h-32 md:w-32 rounded-full object-cover border-4 border-slate-950"
-                />
-              </div>
+        <!-- floating skill chips -->
+        <div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.18em] text-slate-300/70 mt-4">
+          <span class="px-3 py-1 rounded-full border border-slate-600/80 bg-slate-900/60 float-soft">AI &amp; automation</span>
+          <span class="px-3 py-1 rounded-full border border-slate-600/80 bg-slate-900/60 float-soft-alt">Service &amp; CX systems</span>
+          <span class="px-3 py-1 rounded-full border border-slate-600/80 bg-slate-900/60 float-soft-fast">Ops &amp; workflows</span>
+          <span class="px-3 py-1 rounded-full border border-slate-600/80 bg-slate-900/60">Creative strategy</span>
+        </div>
+      </div>
 
-              <div>
-                <p class="text-[0.7rem] uppercase tracking-[0.26em] text-slate-400 mb-1">
-                  Raphael Castellano
-                </p>
-                <p class="text-sm text-slate-300 max-w-sm mx-auto">
-                  AI innovator, virtual support partner, and systems thinker. I combine
-                  empathy, structure, and technology to help people work with more
-                  clarity and less chaos.
-                </p>
-              </div>
-
-              <div class="grid grid-cols-2 gap-4 w-full mt-1">
-                <div class="rounded-xl bg-slate-950/70 border border-slate-700 px-4 py-3 text-left">
-                  <p class="text-[0.65rem] uppercase tracking-[0.2em] text-slate-400 mb-1">
-                    Experience
-                  </p>
-                  <p class="text-sm text-slate-50">20+ years</p>
-                  <p class="text-[0.7rem] text-slate-400">
-                    Customer service, IT, and operations.
-                  </p>
-                </div>
-                <div class="rounded-xl bg-slate-950/70 border border-slate-700 px-4 py-3 text-left">
-                  <p class="text-[0.65rem] uppercase tracking-[0.2em] text-slate-400 mb-1">
-                    Focus
-                  </p>
-                  <p class="text-sm text-slate-50">AI workflows & digital ops</p>
-                  <p class="text-[0.7rem] text-slate-400">
-                    Helping tools work for people, not the other way around.
-                  </p>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-2 gap-4 w-full">
-                <div class="rounded-xl bg-emerald-900/40 border border-emerald-400/70 px-4 py-3 text-left">
-                  <p class="text-[0.65rem] uppercase tracking-[0.2em] text-emerald-200 mb-1">
-                    Availability
-                  </p>
-                  <p class="text-sm text-slate-50">Remote · Flexible</p>
-                  <p class="text-[0.7rem] text-emerald-100/90">
-                    Open to long-term collaboration and focused projects.
-                  </p>
-                </div>
-
-                <div class="rounded-xl bg-sky-900/40 border border-sky-400/70 px-4 py-3 text-left">
-                  <p class="text-[0.65rem] uppercase tracking-[0.2em] text-sky-200 mb-1">
-                    How I work
-                  </p>
-                  <p class="text-sm text-slate-50">Thoughtful & structured</p>
-                  <p class="text-[0.7rem] text-sky-100/90">
-                    Clear communication, realistic pacing, and honest feedback.
-                  </p>
-                </div>
-              </div>
-
-              <a
-                href="about.html"
-                class="mt-4 inline-flex items-center gap-2 text-[0.75rem] text-slate-300 hover:text-teal-300 transition"
-              >
-                Learn more about my journey
-                <span aria-hidden="true">↗</span>
-              </a>
+      <!-- RIGHT: avatar + floating stat cards -->
+      <div class="relative z-[2]">
+        <!-- avatar -->
+        <div class="flex justify-center mb-8">
+          <div class="avatar-ring">
+            <div class="relative h-28 w-28 sm:h-32 sm:w-32 rounded-full overflow-hidden bg-slate-900">
+              <img
+                src="./resources/profile.jpg"
+                alt="Raphael Castellano"
+                class="h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
-      </section>
+
+        <!-- glowing panel -->
+        <div class="relative rounded-3xl bg-slate-900/70 border border-slate-700/70 backdrop-blur-xl px-6 py-6 shadow-[0_28px_80px_rgba(15,23,42,0.9)]">
+          <p class="text-xs font-semibold tracking-[0.22em] text-emerald-300/90 mb-3">
+            HOW I HELP
+          </p>
+          <p class="text-sm text-slate-200 mb-6">
+            AI innovator, virtual support partner, and systems thinker.
+            I combine empathy, structure, and technology to help people
+            work with **more clarity and less chaos**.
+          </p>
+
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="rounded-2xl border border-slate-700/80 bg-slate-900/80 p-3 float-soft">
+              <p class="text-[11px] font-semibold text-slate-300 mb-1">Experience</p>
+              <p class="text-sm font-semibold text-emerald-300">20+ years</p>
+              <p class="text-[11px] text-slate-400 mt-1">Service, tech &amp; ops</p>
+            </div>
+            <div class="rounded-2xl border border-slate-700/80 bg-slate-900/80 p-3 float-soft-alt">
+              <p class="text-[11px] font-semibold text-slate-300 mb-1">Focus</p>
+              <p class="text-sm font-semibold text-sky-300">AI workflows</p>
+              <p class="text-[11px] text-slate-400 mt-1">Assistants &amp; automations</p>
+            </div>
+            <div class="rounded-2xl border border-slate-700/80 bg-slate-900/80 p-3 float-soft-fast">
+              <p class="text-[11px] font-semibold text-slate-300 mb-1">Availability</p>
+              <p class="text-sm font-semibold text-emerald-300">Remote • Flexible</p>
+              <p class="text-[11px] text-slate-400 mt-1">Long-term partnerships</p>
+            </div>
+            <div class="rounded-2xl border border-slate-700/80 bg-slate-900/80 p-3">
+              <p class="text-[11px] font-semibold text-slate-300 mb-1">Style</p>
+              <p class="text-sm font-semibold text-amber-300">Thoughtful &amp; structured</p>
+              <p class="text-[11px] text-slate-400 mt-1">Calm, clear, human-first</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       <!-- WHAT I HELP WITH -->
       <section class="max-w-6xl mx-auto mt-16 fade-in" id="section-help">

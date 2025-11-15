@@ -1,445 +1,586 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raphael Castellano - AI Trainer & Creative Technologist</title>
-    <meta name="description" content="Raphael Castellano's professional portfolio showcasing 20+ years of AI innovation, business strategy, and creative design excellence.">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Core Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-    
-    <style>
-        :root {
-            --primary-dark: #1a1a1a;
-            --primary-light: #fafafa;
-            --accent-teal: #4a9b8e;
-            --accent-amber: #f59e0b;
-            --text-gray: #6b7280;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            overflow-x: hidden;
-        }
-        
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .hero-bg {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(74, 155, 142, 0.1)),
-                        url('./resources/hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .particle-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-teal), var(--accent-amber));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .project-card {
-            transition: all 0.3s ease;
-            transform-style: preserve-3d;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .skill-bar {
-            background: rgba(107, 114, 128, 0.2);
-            border-radius: 9999px;
-            overflow: hidden;
-        }
-        
-        .skill-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-teal), var(--accent-amber));
-            border-radius: 9999px;
-            width: 0%;
-            transition: width 1.5s ease;
-        }
-        
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-        
-        .animate-on-scroll.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .navbar {
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .navbar.scrolled {
-            background: rgba(250, 250, 250, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            z-index: 1000;
-        }
-        
-        .notification-success {
-            background: var(--accent-teal);
-        }
-        
-        .notification-error {
-            background: #ef4444;
-        }
-        
-        .typewriter-cursor {
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-teal), var(--accent-amber));
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(74, 155, 142, 0.3);
-        }
-        
-        .filter-btn.active {
-            background: var(--accent-teal);
-            color: white;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raphael Castellano – AI Innovator & Creative Technologist</title>
+  <meta
+    name="description"
+    content="Raphael Castellano – AI innovator, data-savvy problem solver, and creative technologist helping teams build smarter workflows, better service, and meaningful digital experiences."
+  />
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-card: rgba(15, 23, 42, 0.96);
+      --accent-teal: #14b8a6;
+      --accent-amber: #fbbf24;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #a855f7;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, #0f172a 0, #020617 40%, #000 100%);
+      color: #e5e7eb;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: "Playfair Display", serif;
+    }
+
+    /* Page glow */
+    .page-shell {
+      position: relative;
+      min-height: 100vh;
+      padding-bottom: 4rem;
+    }
+    .page-shell::before,
+    .page-shell::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(80px);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .page-shell::before {
+      width: 26rem;
+      height: 26rem;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.9), transparent 70%);
+      top: -6rem;
+      left: -6rem;
+    }
+    .page-shell::after {
+      width: 26rem;
+      height: 26rem;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.9), transparent 70%);
+      bottom: -6rem;
+      right: -4rem;
+    }
+
+    /* Navbar */
+    .navbar {
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.85));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      transition: box-shadow 0.25s ease, background 0.25s ease;
+    }
+    .navbar-scrolled {
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent-teal), var(--accent-amber));
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .nav-active {
+      color: var(--accent-teal);
+    }
+    .nav-active::after {
+      width: 100%;
+    }
+
+    /* Glass hero panel */
+    .glass-panel {
+      position: relative;
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), rgba(15, 23, 42, 0.96));
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow:
+        0 28px 90px rgba(15, 23, 42, 0.98),
+        0 0 0 1px rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(26px);
+      overflow: hidden;
+    }
+
+    .glass-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.25;
+      background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.35) 1px, transparent 0);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+
+    .avatar-ring {
+      background: conic-gradient(
+        from 220deg,
+        var(--accent-teal),
+        var(--accent-cyan),
+        var(--accent-purple),
+        var(--accent-amber),
+        var(--accent-teal)
+      );
+      padding: 3px;
+      border-radius: 999px;
+      box-shadow:
+        0 0 25px rgba(34, 197, 94, 0.9),
+        0 0 50px rgba(56, 189, 248, 0.7);
+    }
+
+    .badge-soft {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 0.3rem 0.9rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .pill-tag {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.25), rgba(15, 23, 42, 0.96));
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background-image: linear-gradient(135deg, var(--accent-teal), var(--accent-amber));
+      color: #020617;
+      box-shadow:
+        0 0 26px rgba(34, 197, 94, 0.8),
+        0 20px 40px rgba(15, 23, 42, 0.98);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow:
+        0 0 40px rgba(251, 191, 36, 0.7),
+        0 28px 60px rgba(15, 23, 42, 1);
+    }
+
+    .btn-ghost {
+      background-color: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .btn-ghost:hover {
+      background-color: rgba(15, 23, 42, 1);
+      border-color: rgba(148, 163, 184, 1);
+      transform: translateY(-1px);
+    }
+
+    .section-card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), rgba(15, 23, 42, 0.98));
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 1);
+    }
+
+    /* Simple fade animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar fixed top-0 w-full z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="font-display font-bold text-xl text-gray-800">
-                RC
-            </div>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link text-gray-700 hover:text-teal-600 transition-colors">Home</a>
-                <a href="projects.html" class="nav-link text-gray-700 hover:text-teal-600 transition-colors">Projects</a>
-                <a href="about.html" class="nav-link text-gray-700 hover:text-teal-600 transition-colors">About</a>
-                <a href="contact.html" class="nav-link text-gray-700 hover:text-teal-600 transition-colors">Contact</a>
-            </div>
-            
-            <button class="md:hidden mobile-toggle">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
-    </nav>
+  <div class="page-shell">
+    <!-- NAVBAR -->
+    <header class="navbar fixed top-0 inset-x-0 z-30">
+      <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-6 py-3 md:py-4">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="avatar-ring">
+            <img
+              src="./resources/logo-menorah.png"
+              alt="RC Logo"
+              class="h-9 w-9 rounded-full bg-slate-950 object-cover"
+            />
+          </div>
+          <div class="flex flex-col leading-tight">
+            <span class="font-display text-base md:text-lg font-semibold text-slate-100">
+              Raphael Castellano
+            </span>
+            <span class="text-[0.65rem] uppercase tracking-[0.2em] text-slate-400">
+              AI • Data • Creative Systems
+            </span>
+          </div>
+        </a>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-bg min-h-screen flex items-center justify-center relative">
-        <canvas id="particle-canvas" class="particle-container"></canvas>
-        
-        <div class="hero-content text-center text-white px-6 max-w-4xl mx-auto">
-            <div class="mb-8">
-                <img src="./resources/profile.jpg" alt="Raphael Castellano" 
-                     class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white/20 shadow-2xl">
+        <div class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-200">
+          <a href="index.html" class="nav-link nav-active">Home</a>
+          <a href="projects.html" class="nav-link hover:text-teal-300">Projects</a>
+          <a href="about.html" class="nav-link hover:text-teal-300">About</a>
+          <a href="contact.html" class="nav-link hover:text-teal-300">Contact</a>
+          <a
+            href="resources/Raphael_Castellano_CV.pdf"
+            download
+            class="text-xs border border-emerald-400/70 rounded-full px-3 py-1.5 hover:bg-emerald-400/10"
+          >
+            Download CV
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-28 md:pt-32 px-4 md:px-6 relative z-10">
+      <!-- HERO -->
+      <section class="max-w-6xl mx-auto hero-grid grid md:grid-cols-2 gap-10 items-center">
+        <!-- Left: text -->
+        <div class="fade-in" id="hero-text">
+          <div class="pill-tag inline-flex items-center gap-2 px-4 py-2 mb-5 text-xs text-teal-100">
+            <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Remote-ready · Trinidad & Tobago · Global clients
+          </div>
+
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-slate-50 leading-tight mb-4">
+            I design <span class="text-teal-300">AI-powered</span> and
+            <span class="text-amber-300">human-centered</span> systems.
+          </h1>
+
+          <p class="text-slate-300 text-sm md:text-base max-w-xl mb-4">
+            I’m Raphael, a data-savvy problem solver and creative technologist with
+            20+ years in service, tech, and operations. I help leaders turn
+            scattered tools and ideas into workflows that feel clear, calm, and
+            actually sustainable.
+          </p>
+
+          <p class="text-slate-400 text-xs md:text-sm max-w-xl mb-7">
+            Whether you’re trying to ship faster, support customers better, or make
+            smarter use of AI, my focus is simple: build systems that respect people
+            and deliver results.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 mb-6">
+            <a
+              href="projects.html"
+              class="btn-primary inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold"
+            >
+              Explore My Work
+            </a>
+            <a
+              href="contact.html"
+              class="btn-ghost inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold text-slate-100"
+            >
+              Start a Conversation
+            </a>
+          </div>
+
+          <div class="flex flex-wrap gap-3 text-xs text-slate-300">
+            <span class="badge-soft border-emerald-400/70 text-emerald-200">
+              AI & Automation
+            </span>
+            <span class="badge-soft border-sky-400/70 text-sky-200">
+              Data & Insight
+            </span>
+            <span class="badge-soft border-amber-400/70 text-amber-200">
+              CX & Operations
+            </span>
+            <span class="badge-soft border-purple-400/70 text-purple-200">
+              Creative Systems
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: profile card -->
+        <div class="fade-in" id="hero-card">
+          <div class="glass-panel p-7 md:p-8">
+            <div class="relative flex flex-col items-center text-center gap-5">
+              <div class="avatar-ring">
+                <img
+                  src="./resources/profile.jpg"
+                  alt="Raphael Castellano"
+                  class="h-28 w-28 md:h-32 md:w-32 rounded-full object-cover border-4 border-slate-950"
+                />
+              </div>
+
+              <div>
+                <p class="text-[0.7rem] uppercase tracking-[0.26em] text-slate-400 mb-1">
+                  Raphael Castellano
+                </p>
+                <p class="text-sm text-slate-300 max-w-sm mx-auto">
+                  AI innovator, virtual support partner, and systems thinker. I combine
+                  empathy, structure, and technology to help people work with more
+                  clarity and less chaos.
+                </p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 w-full mt-1">
+                <div class="rounded-xl bg-slate-950/70 border border-slate-700 px-4 py-3 text-left">
+                  <p class="text-[0.65rem] uppercase tracking-[0.2em] text-slate-400 mb-1">
+                    Experience
+                  </p>
+                  <p class="text-sm text-slate-50">20+ years</p>
+                  <p class="text-[0.7rem] text-slate-400">
+                    Customer service, IT, and operations.
+                  </p>
+                </div>
+                <div class="rounded-xl bg-slate-950/70 border border-slate-700 px-4 py-3 text-left">
+                  <p class="text-[0.65rem] uppercase tracking-[0.2em] text-slate-400 mb-1">
+                    Focus
+                  </p>
+                  <p class="text-sm text-slate-50">AI workflows & digital ops</p>
+                  <p class="text-[0.7rem] text-slate-400">
+                    Helping tools work for people, not the other way around.
+                  </p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 w-full">
+                <div class="rounded-xl bg-emerald-900/40 border border-emerald-400/70 px-4 py-3 text-left">
+                  <p class="text-[0.65rem] uppercase tracking-[0.2em] text-emerald-200 mb-1">
+                    Availability
+                  </p>
+                  <p class="text-sm text-slate-50">Remote · Flexible</p>
+                  <p class="text-[0.7rem] text-emerald-100/90">
+                    Open to long-term collaboration and focused projects.
+                  </p>
+                </div>
+
+                <div class="rounded-xl bg-sky-900/40 border border-sky-400/70 px-4 py-3 text-left">
+                  <p class="text-[0.65rem] uppercase tracking-[0.2em] text-sky-200 mb-1">
+                    How I work
+                  </p>
+                  <p class="text-sm text-slate-50">Thoughtful & structured</p>
+                  <p class="text-[0.7rem] text-sky-100/90">
+                    Clear communication, realistic pacing, and honest feedback.
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="about.html"
+                class="mt-4 inline-flex items-center gap-2 text-[0.75rem] text-slate-300 hover:text-teal-300 transition"
+              >
+                Learn more about my journey
+                <span aria-hidden="true">↗</span>
+              </a>
             </div>
-            
-            <h1 class="hero-title font-display text-5xl md:text-7xl font-bold mb-6 gradient-text" data-splitting>
-                Raphael Castellano
-            </h1>
-            
-            <div class="text-xl md:text-2xl mb-8 h-16">
-                <span id="typewriter-text" class="font-medium"></span>
-            </div>
-            
-            <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
-                Passionate AI innovator with 20+ years of experience spanning customer service, 
-                executive assistance, marketing, IT support, and cutting-edge AI solutions.
+          </div>
+        </div>
+      </section>
+
+      <!-- WHAT I HELP WITH -->
+      <section class="max-w-6xl mx-auto mt-16 fade-in" id="section-help">
+        <div class="section-card p-6 md:p-8 flex flex-col md:flex-row gap-6 md:items-center">
+          <div class="flex-1">
+            <p class="text-[0.7rem] uppercase tracking-[0.22em] text-slate-300 mb-2">
+              What I help teams do
             </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="projects.html" class="btn-primary px-8 py-4 rounded-full text-white font-semibold text-lg">
-                    Explore My Work
-                </a>
-                <a href="contact.html" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-800 transition-all">
-                    Get In Touch
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Projects -->
-    <section class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-                    Featured Projects
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Explore my latest innovations in AI, business strategy, and creative design
-                </p>
-            </div>
-            
-            <div class="project-carousel splide">
-                <div class="splide__track">
-                    <ul class="splide__list">
-                        <li class="splide__slide">
-                            <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden" data-category="ai">
-                                <div class="h-48 bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <div class="p-6">
-                                    <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">AI Chess Game</h3>
-                                    <p class="text-gray-600 mb-4">Advanced chess implementation using Firebase and no-code AI tools for intelligent gameplay.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">Firebase</span>
-                                        <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">No-Code AI</span>
-                                    </div>
-                                    <a href="#" class="text-teal-600 font-semibold hover:text-teal-700 transition-colors">
-                                        Learn More →
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <li class="splide__slide">
-                            <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden" data-category="automation">
-                                <div class="h-48 bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                    </svg>
-                                </div>
-                                <div class="p-6">
-                                    <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">Firebase Uploader Tool</h3>
-                                    <p class="text-gray-600 mb-4">Automated workflow solution for seamless file uploads and data management.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Firebase</span>
-                                        <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Automation</span>
-                                    </div>
-                                    <a href="#" class="text-amber-600 font-semibold hover:text-amber-700 transition-colors">
-                                        Learn More →
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <li class="splide__slide">
-                            <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden" data-category="ai">
-                                <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                </div>
-                                <div class="p-6">
-                                    <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">Sentiment Analysis AI</h3>
-                                    <p class="text-gray-600 mb-4">NLP-powered sentiment analysis tool for movie reviews with high accuracy rates.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">NLP</span>
-                                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">GitHub</span>
-                                    </div>
-                                    <a href="#" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
-                                        Learn More →
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <li class="splide__slide">
-                            <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden" data-category="ai">
-                                <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                                    </svg>
-                                </div>
-                                <div class="p-6">
-                                    <h3 class="font-display text-2xl font-bold mb-3 text-gray-800">Plant Disease Classifier</h3>
-                                    <p class="text-gray-600 mb-4">Advanced image classification system for identifying plant diseases using machine learning.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Image Classification</span>
-                                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">ML</span>
-                                    </div>
-                                    <a href="#" class="text-green-600 font-semibold hover:text-green-700 transition-colors">
-                                        Learn More →
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Overview -->
-    <section class="py-20 px-6 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-                    Core Competencies
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    A visual representation of my key skills and expertise areas
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="animate-on-scroll">
-                    <div id="skill-chart" style="width: 100%; height: 400px;"></div>
-                </div>
-                
-                <div class="space-y-6 animate-on-scroll">
-                    <div class="skill-bar h-4 rounded-full" data-percentage="90">
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold text-gray-700">AI & Machine Learning</span>
-                            <span class="text-gray-600">90%</span>
-                        </div>
-                        <div class="skill-fill h-full"></div>
-                    </div>
-                    
-                    <div class="skill-bar h-4 rounded-full" data-percentage="95">
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold text-gray-700">Business Strategy</span>
-                            <span class="text-gray-600">95%</span>
-                        </div>
-                        <div class="skill-fill h-full"></div>
-                    </div>
-                    
-                    <div class="skill-bar h-4 rounded-full" data-percentage="85">
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold text-gray-700">Prompt Engineering</span>
-                            <span class="text-gray-600">85%</span>
-                        </div>
-                        <div class="skill-fill h-full"></div>
-                    </div>
-                    
-                    <div class="skill-bar h-4 rounded-full" data-percentage="80">
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold text-gray-700">Creative Design</span>
-                            <span class="text-gray-600">80%</span>
-                        </div>
-                        <div class="skill-fill h-full"></div>
-                    </div>
-                    
-                    <div class="skill-bar h-4 rounded-full" data-percentage="75">
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold text-gray-700">Full-Stack Development</span>
-                            <span class="text-gray-600">75%</span>
-                        </div>
-                        <div class="skill-fill h-full"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-20 px-6 bg-gradient-to-r from-teal-600 to-amber-600 text-white">
-        <div class="max-w-4xl mx-auto text-center animate-on-scroll">
-            <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
-                Ready to Innovate Together?
+            <h2 class="font-display text-2xl md:text-3xl text-slate-50 mb-2">
+              Turn messy, manual work into clear, reliable systems.
             </h2>
-            <p class="text-xl mb-8 opacity-90">
-                Let's discuss how my expertise in AI, business strategy, and creative design can help bring your vision to life.
+            <p class="text-sm md:text-base text-slate-300 max-w-xl">
+              I specialize in mapping how you currently work, then using AI, automation,
+              and solid processes to remove friction – without losing the human touch.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="contact.html" class="bg-white text-gray-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all">
-                    Start a Conversation
-                </a>
-                <a href="projects.html" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-800 transition-all">
-                    View All Projects
-                </a>
+          </div>
+          <div class="grid sm:grid-cols-3 gap-3 text-xs w-full md:w-auto">
+            <div class="rounded-xl bg-slate-950/75 border border-slate-700 px-4 py-3">
+              <p class="font-semibold text-slate-100 mb-1">AI workflows</p>
+              <p class="text-slate-400">
+                Assistants, prompts, and automations that plug into your existing tools.
+              </p>
             </div>
+            <div class="rounded-xl bg-slate-950/75 border border-slate-700 px-4 py-3">
+              <p class="font-semibold text-slate-100 mb-1">Data & insight</p>
+              <p class="text-slate-400">
+                Turning scattered data into dashboards, summaries, and real decisions.
+              </p>
+            </div>
+            <div class="rounded-xl bg-slate-950/75 border border-slate-700 px-4 py-3">
+              <p class="font-semibold text-slate-100 mb-1">Creative systems</p>
+              <p class="text-slate-400">
+                Supporting brands, content, and storytelling with structure.
+              </p>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <div class="font-display text-2xl font-bold mb-4 gradient-text">
-                Raphael Castellano
-            </div>
-            <p class="text-gray-400 mb-6">
-                AI Trainer • Prompt Engineer • Creative Technologist
+      <!-- PROJECT PREVIEW -->
+      <section class="max-w-6xl mx-auto mt-16 fade-in" id="section-projects">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <p class="text-[0.7rem] uppercase tracking-[0.22em] text-slate-400 mb-1">
+              Selected work
             </p>
-            <div class="flex justify-center space-x-6 mb-8">
-                <a href="mailto:bosslongsan34@gmail.com" class="text-gray-400 hover:text-white transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                </a>
-                <a href="tel:+18687881042" class="text-gray-400 hover:text-white transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                    </svg>
-                </a>
-            </div>
-            <p class="text-gray-500 text-sm">
-                © 2024 Raphael Castellano. All rights reserved.
-            </p>
+            <h2 class="font-display text-2xl md:text-3xl text-slate-50">
+              A preview of the kind of work I do.
+            </h2>
+          </div>
+          <a
+            href="projects.html"
+            class="hidden sm:inline-flex items-center gap-1 text-[0.75rem] text-teal-300 hover:text-teal-200"
+          >
+            View all projects
+            <span aria-hidden="true">↗</span>
+          </a>
         </div>
+
+        <div class="grid md:grid-cols-3 gap-5 text-xs md:text-sm">
+          <article class="rounded-2xl bg-slate-950/80 border border-slate-700 p-5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-emerald-300 mb-2">
+              Automation & AI
+            </p>
+            <h3 class="font-semibold text-slate-50 mb-1">
+              AI assistant for client onboarding
+            </h3>
+            <p class="text-slate-400 mb-3">
+              Helped design a no-code assistant that collects, organizes, and routes
+              client information so teams start projects with clarity, not chaos.
+            </p>
+            <p class="text-[0.7rem] text-slate-500">
+              Result: faster onboarding, fewer emails, and less manual follow-up.
+            </p>
+          </article>
+
+          <article class="rounded-2xl bg-slate-950/80 border border-slate-700 p-5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-sky-300 mb-2">
+              Data & reporting
+            </p>
+            <h3 class="font-semibold text-slate-50 mb-1">
+              Service performance & insight dashboard
+            </h3>
+            <p class="text-slate-400 mb-3">
+              Combined support logs, feedback, and time tracking into a single view so
+              leaders could see where energy was going – and where it was being wasted.
+            </p>
+            <p class="text-[0.7rem] text-slate-500">
+              Result: clearer priorities, confident decisions, and focused improvement.
+            </p>
+          </article>
+
+          <article class="rounded-2xl bg-slate-950/80 border border-slate-700 p-5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-purple-300 mb-2">
+              Creative systems
+            </p>
+            <h3 class="font-semibold text-slate-50 mb-1">
+              AI-assisted content & music workflow
+            </h3>
+            <p class="text-slate-400 mb-3">
+              Helped build a workflow for planning, drafting, and repurposing content
+              across music, visuals, and teaching – without burning out.
+            </p>
+            <p class="text-[0.7rem] text-slate-500">
+              Result: consistent output with room for creativity, not just grind.
+            </p>
+          </article>
+        </div>
+
+        <a
+          href="projects.html"
+          class="mt-5 inline-flex sm:hidden items-center gap-1 text-[0.75rem] text-teal-300 hover:text-teal-200"
+        >
+          View all projects
+          <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <!-- CTA SECTION -->
+      <section class="max-w-6xl mx-auto mt-18 md:mt-20 fade-in" id="section-cta">
+        <div class="section-card p-7 md:p-9 flex flex-col md:flex-row gap-6 md:items-center">
+          <div class="flex-1">
+            <p class="text-[0.7rem] uppercase tracking-[0.22em] text-slate-300 mb-2">
+              Next step
+            </p>
+            <h2 class="font-display text-2xl md:text-3xl text-slate-50 mb-3">
+              Curious how this could apply to your work?
+            </h2>
+            <p class="text-sm md:text-base text-slate-300 max-w-xl">
+              We don’t have to solve everything at once. We can start with a single
+              process, a single pain point, or a single idea – and build from there.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 w-full md:w-auto">
+            <a
+              href="contact.html"
+              class="btn-primary inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold"
+            >
+              Start a Conversation
+            </a>
+            <a
+              href="resources/Raphael_Castellano_CV.pdf"
+              download
+              class="btn-ghost inline-flex items-center justify-center px-6 py-3 rounded-full text-xs font-medium text-slate-100"
+            >
+              Or download my CV
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 border-t border-slate-800/80">
+      <div class="max-w-6xl mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>© <span id="year"></span> Raphael Castellano. All rights reserved.</p>
+        <p class="text-[0.7rem]">
+          Built with curiosity, craft, and a little teal light.
+        </p>
+      </div>
     </footer>
+  </div>
 
-    <script src="main.js"></script>
+  <script>
+    // Navbar scroll effect
+    const navbar = document.querySelector(".navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 12) {
+        navbar.classList.add("navbar-scrolled");
+      } else {
+        navbar.classList.remove("navbar-scrolled");
+      }
+    });
+
+    // Fade-in on load
+    window.addEventListener("load", () => {
+      ["hero-text", "hero-card", "section-help", "section-projects", "section-cta"].forEach((id, index) => {
+        const el = document.getElementById(id);
+        if (el) {
+          setTimeout(() => el.classList.add("visible"), 120 * index);
+        }
+      });
+      const yearSpan = document.getElementById("year");
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+  </script>
 </body>
 </html>
